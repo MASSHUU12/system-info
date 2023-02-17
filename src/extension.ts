@@ -1,25 +1,21 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
-import * as vscode from "vscode";
+import { ExtensionContext } from "vscode";
+import { StatusCombined } from "./interfaces/statusCombined";
+import { displayData } from "./lib/displayData";
+import { StatusItem } from "./lib/statusBar";
 
-// This method is called when your extension is activated
-// Your extension is activated the very first time the command is executed
-export function activate(context: vscode.ExtensionContext) {
-  // Use the console to output diagnostic information (console.log) and errors (console.error)
-  // This line of code will only be executed once when your extension is activated
-  console.log('Congratulations, your extension "system-info" is now active!');
+// This method is called when extension is activated
+export function activate(context: ExtensionContext): void {
+  const status: StatusCombined = {
+    cpu: new StatusItem(),
+    gpu: new StatusItem(),
+    ram: new StatusItem(),
+  };
 
-  // The command has been defined in the package.json file
-  // Now provide the implementation of the command with registerCommand
-  // The commandId parameter must match the command field in package.json
-  // let disposable = vscode.commands.registerCommand('system-info.helloWorld', () => {
-  // The code you place here will be executed every time your command is executed
-  // Display a message box to the user
-  // 	vscode.window.showInformationMessage('Hello World from System Info!');
-  // });
-
-  // context.subscriptions.push(disposable);
+  // Run main loop when extension is activated
+  const loop = setInterval(() => {
+    displayData(status);
+  }, 500);
 }
 
-// This method is called when your extension is deactivated
-export function deactivate() {}
+// This method is called when extension is deactivated
+export function deactivate(): void {}
