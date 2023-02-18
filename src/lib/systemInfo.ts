@@ -1,50 +1,31 @@
 import * as si from "systeminformation";
 import { Converter } from "../helpers/unitConverter";
+import os = require("os");
 
 export class SystemInfo {
   /**
-   * Get current CPU speed (in GHz)
+   * Get the current CPU load of this process in percent
    *
    * @static
    * @return {*}  {Promise<string>}
    * @memberof SystemInfo
    */
-  static async cpuCurrentSpeed(): Promise<string> {
-    return await si.cpuCurrentSpeed().then((data): string => {
-      return `${data.avg} GHz`;
-    });
-  }
-
-  /**
-   * Get CPU max speed (in GHz)
-   *
-   * @static
-   * @return {*}  {Promise<string>}
-   * @memberof SystemInfo
-   */
-  static async cpuMaxSpeed(): Promise<string> {
-    return await si.cpu().then((data) => {
-      return `${data.speedMax} GHz`;
-    });
-  }
-
-  static async cpuCombinedData(): Promise<string> {
-    const current = await this.cpuCurrentSpeed();
-    const max = await this.cpuMaxSpeed();
-
-    return `${current} / ${max}`;
-  }
-
-  /**
-   * Get current CPU load (in %)
-   *
-   * @static
-   * @return {*}  {Promise<string>}
-   * @memberof SystemInfo
-   */
-  static async cpuCurrentLoad(): Promise<string> {
+  static async cpuCurrentProcessLoad(): Promise<string> {
     return si.currentLoad().then((data) => {
       return `CPU: ${data.currentLoad.toFixed(2)}%`;
+    });
+  }
+
+  /**
+   * Get the current CPU system load in percent
+   *
+   * @static
+   * @return {*}  {Promise<string>}
+   * @memberof SystemInfo
+   */
+  static async cpuCurrentSystemLoad(): Promise<string> {
+    return si.currentLoad().then((data) => {
+      return `CPU: ${data.cpus[0]["load"].toFixed(2)}%`;
     });
   }
 
