@@ -4,7 +4,7 @@ import { StatusColors } from "../constants/enums";
 export class StatusItem {
   private item;
 
-  constructor(text = "", alignment = StatusBarAlignment.Right, priority = 0) {
+  constructor(text = "", alignment = StatusBarAlignment.Left, priority = 0) {
     this.item = window.createStatusBarItem(alignment, priority);
     this.item.text = text;
     this.item.show();

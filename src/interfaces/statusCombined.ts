@@ -4,4 +4,5 @@ export interface StatusCombined {
   cpu: StatusItem;
   gpu: StatusItem;
   ram: StatusItem;
+  battery: StatusItem;
 }

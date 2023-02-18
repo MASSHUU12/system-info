@@ -5,4 +5,12 @@ export function displayData(status: StatusCombined): void {
   SystemInfo.cpuCurrentLoad().then((data) => {
     status.cpu.text(data);
   });
+
+  // SystemInfo.batteryPercent().then((data) => {
+  //   data !== undefined && status.battery.text(data);
+  // });
+
+  SystemInfo.memoryActive().then((data) => {
+    status.ram.text(data);
+  });
 }

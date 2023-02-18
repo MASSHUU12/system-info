@@ -9,6 +9,7 @@ export function activate(context: ExtensionContext): void {
     cpu: new StatusItem(),
     gpu: new StatusItem(),
     ram: new StatusItem(),
+    battery: new StatusItem(),
   };
 
   // Run main loop when extension is activated
