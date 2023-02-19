@@ -1,6 +1,6 @@
-import * as si from "systeminformation";
 import { Converter } from "../helpers/unitConverter";
-import os = require("os");
+import { currentLoad, battery, mem } from "systeminformation";
+import * as os from "os";
 
 export class SystemInfo {
   /**
@@ -11,7 +11,7 @@ export class SystemInfo {
    * @memberof SystemInfo
    */
   static async cpuCurrentProcessLoad(): Promise<string> {
-    return si.currentLoad().then((data) => {
+    return currentLoad().then((data) => {
       return `CPU: ${data.currentLoad.toFixed(2)}%`;
     });
   }
@@ -23,10 +23,8 @@ export class SystemInfo {
    * @return {*}  {Promise<string>}
    * @memberof SystemInfo
    */
-  static async cpuCurrentSystemLoad(): Promise<string> {
-    return si.currentLoad().then((data) => {
-      return `CPU: ${data.cpus[0]["load"].toFixed(2)}%`;
-    });
+  static cpuCurrentSystemLoad(): string {
+    return "CPU: ///";
   }
 
   /**
@@ -39,9 +37,9 @@ export class SystemInfo {
    * @memberof SystemInfo
    */
   static async batteryPercent(): Promise<string | undefined> {
-    const hasBattery = (await si.battery()).hasBattery;
+    const hasBattery = (await battery()).hasBattery;
 
-    return hasBattery ? `${(await si.battery()).percent}%` : undefined;
+    return hasBattery ? `${(await battery()).percent}%` : undefined;
   }
 
   /**
@@ -52,6 +50,6 @@ export class SystemInfo {
    * @memberof SystemInfo
    */
   static async memoryActive(): Promise<string> {
-    return `RAM: ${Converter.auto((await si.mem()).active)}`;
+    return `RAM: ${Converter.auto((await mem()).active)}`;
   }
 }

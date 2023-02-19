@@ -7,7 +7,6 @@ import { StatusItem } from "./lib/statusBar";
 export function activate(context: ExtensionContext): void {
   const status: StatusCombined = {
     cpu: new StatusItem(),
-    gpu: new StatusItem(),
     ram: new StatusItem(),
     battery: new StatusItem(),
   };

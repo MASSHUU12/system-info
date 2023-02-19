@@ -2,13 +2,7 @@ import { StatusCombined } from "../interfaces/statusCombined";
 import { SystemInfo } from "./systemInfo";
 
 export function displayData(status: StatusCombined): void {
-  SystemInfo.cpuCurrentSystemLoad().then((data) => {
-    status.cpu.text(data);
-  });
-
-  // SystemInfo.batteryPercent().then((data) => {
-  //   data !== undefined && status.battery.text(data);
-  // });
+  status.cpu.text(SystemInfo.cpuCurrentSystemLoad());
 
   SystemInfo.memoryActive().then((data) => {
     status.ram.text(data);
