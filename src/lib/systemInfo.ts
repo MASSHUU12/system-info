@@ -17,14 +17,53 @@ export class SystemInfo {
   }
 
   /**
-   * Get the current CPU system load in percent
+   * Get the current CPU usage
    *
    * @static
-   * @return {*}  {Promise<string>}
+   * @param {(percentage: string) => any} callback
    * @memberof SystemInfo
    */
-  static cpuCurrentSystemLoad(): string {
-    return "CPU: ///";
+  static cpuUsage(callback: (percentage: string) => any): void {
+    let stats1 = SystemInfo.cpuInfo();
+    let startIdle = stats1.idle;
+    let startTotal = stats1.total;
+
+    setTimeout(function () {
+      let stats2 = SystemInfo.cpuInfo();
+      let endIdle = stats2.idle;
+      let endTotal = stats2.total;
+
+      let idle = endIdle - startIdle;
+      let total = endTotal - startTotal;
+      let percentage = ((1 - idle / total) * 100).toFixed(2);
+
+      callback(percentage);
+    }, 1000);
+  }
+
+  static cpuInfo() {
+    const cpus = os.cpus();
+
+    let user = 0;
+    let nice = 0;
+    let sys = 0;
+    let idle = 0;
+    let irq = 0;
+    let total = 0;
+
+    for (let cpu in cpus) {
+      user += cpus[cpu].times.user;
+      nice += cpus[cpu].times.nice;
+      sys += cpus[cpu].times.sys;
+      irq += cpus[cpu].times.irq;
+      idle += cpus[cpu].times.idle;
+    }
+    total = user + nice + sys + idle + irq;
+
+    return {
+      idle: idle,
+      total: total,
+    };
   }
 
   /**
