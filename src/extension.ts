@@ -14,7 +14,7 @@ export function activate(context: ExtensionContext): void {
   // Run main loop when extension is activated
   const loop = setInterval(() => {
     displayData(status);
-  }, 500);
+  }, 1000);
 }
 
 // This method is called when extension is deactivated

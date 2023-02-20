@@ -1,8 +1,24 @@
 {
   "name": "system-info",
   "displayName": "System Info",
-  "description": "",
+  "description": "Get up-to-date information about your computer resource usage.",
   "version": "0.0.1",
+  "publisher": "MASSHUU12",
+  "repository": {
+    "type": "github",
+    "url": "https://github.com/MASSHUU12/system-info"
+  },
+  "icon": "assets/icon.png",
+  "homepage": "https://github.com/MASSHUU12/system-info",
+  "bugs": {
+    "url": "https://github.com/MASSHUU12/system-info/issues"
+  },
+  "license": "SEE LICENSE IN LICENSE",
+  "keywords": [
+    "System",
+    "Usage",
+    "Monitor"
+  ],
   "engines": {
     "vscode": "^1.75.0"
   },
