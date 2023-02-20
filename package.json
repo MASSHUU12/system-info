@@ -29,7 +29,20 @@
     "onStartupFinished"
   ],
   "main": "./dist/extension.js",
-  "contributes": {},
+  "contributes": {
+    "configuration": {
+      "title": "System Info",
+      "properties": {
+        "system-info.refreshRate": {
+          "type": "number",
+          "minimum": 500,
+          "maximum": 60000,
+          "default": 1000,
+          "markdownDescription": "Data refresh rate (in ms).\n\n`Note: The more frequent the refresh, the more performance will be affected by the extension.`"
+        }
+      }
+    }
+  },
   "scripts": {
     "vscode:prepublish": "npm run package",
     "compile": "webpack",

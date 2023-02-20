@@ -1,7 +1,7 @@
 import { ExtensionContext } from "vscode";
 import { StatusCombined } from "./interfaces/statusCombined";
-import { displayData } from "./lib/displayData";
 import { StatusItem } from "./lib/statusBar";
+import { updateInfo } from "./lib/updateInfo";
 
 // This method is called when extension is activated
 export function activate(context: ExtensionContext): void {
@@ -12,9 +12,7 @@ export function activate(context: ExtensionContext): void {
   };
 
   // Run main loop when extension is activated
-  const loop = setInterval(() => {
-    displayData(status);
-  }, 1000);
+  updateInfo(status);
 }
 
 // This method is called when extension is deactivated
