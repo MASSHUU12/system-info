@@ -2,7 +2,7 @@
 
 Get up-to-date information about your computer resource usage on status bar.
 
-![Extension video (may not work in the IDE or marketplace, but it works on GitHub)](https://user-images.githubusercontent.com/61974579/220412247-f511aa3b-e6b3-4711-bdf6-e3115444431d.mp4
+[Extension video (may not work in the IDE or marketplace, but it works on GitHub)](https://user-images.githubusercontent.com/61974579/220412247-f511aa3b-e6b3-4711-bdf6-e3115444431d.mp4
 )
 
 ## Features
