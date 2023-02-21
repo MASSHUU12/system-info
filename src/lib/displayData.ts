@@ -1,5 +1,5 @@
 import { StatusCombined } from "../interfaces/statusCombined";
-import { SystemInfo } from "./systemInfo";
+import { SystemInfo } from "./systemInfo/systemInfo";
 
 /**
  * Display data on StatusBar
@@ -13,6 +13,6 @@ export function displayData(status: StatusCombined): void {
 
   // RAM data
   SystemInfo.memoryActive().then((data) => {
-    status.ram.text(data);
+    status.ram.text(`RAM: ${data}`);
   });
 }

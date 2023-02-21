@@ -1,10 +1,9 @@
-import { Converter } from "../helpers/unitConverter";
-import { currentLoad, battery, mem } from "systeminformation";
-import * as os from "os";
 import { exec } from "child_process";
-import { cpuLoadMac, cpuLoadPS1, cpuLoadSH } from "../scripts/scripts";
+import { currentLoad } from "systeminformation";
+import { cpuLoadMac, cpuLoadPS1, cpuLoadSH } from "../../scripts/scripts";
+import { OS } from "./os";
 
-export class SystemInfo {
+export class CPU {
   static cpuLoad = "";
 
   /**
@@ -27,7 +26,7 @@ export class SystemInfo {
    * @memberof SystemInfo
    */
   static cpuSystemLoad() {
-    switch (this.os()) {
+    switch (OS.os()) {
       case "win32":
         this.cpuSpecificOS(cpuLoadPS1, "powershell.exe");
         break;
@@ -74,42 +73,5 @@ export class SystemInfo {
         this.cpuLoad = formatted;
       }
     });
-  }
-
-  /**
-   * Get operating system name
-   *
-   * @static
-   * @return {*}  {string}
-   * @memberof SystemInfo
-   */
-  static os(): string {
-    return os.platform().toString();
-  }
-
-  /**
-   * Get charging level in percent
-   *
-   * ! Huge usage of CPU
-   *
-   * @static
-   * @return {*}  {(Promise<string | undefined>)}
-   * @memberof SystemInfo
-   */
-  static async batteryPercent(): Promise<string | undefined> {
-    const hasBattery = (await battery()).hasBattery;
-
-    return hasBattery ? `${(await battery()).percent}%` : undefined;
-  }
-
-  /**
-   * Get RAM usage
-   *
-   * @static
-   * @return {*}  {Promise<string>}
-   * @memberof SystemInfo
-   */
-  static async memoryActive(): Promise<string> {
-    return `RAM: ${Converter.auto((await mem()).active)}`;
   }
 }
