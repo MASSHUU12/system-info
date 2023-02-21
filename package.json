@@ -41,6 +41,19 @@
           "default": 1000,
           "markdownDescription": "Data refresh rate (in ms).\n\n*Note: The more frequent the refresh, the more performance will be affected by the extension.*"
         },
+        "system-info.location": {
+          "type": "string",
+          "default": "left",
+          "enum": [
+            "left",
+            "right"
+          ],
+          "description": "The place on the status bar where the information will be displayed.",
+          "enumDescriptions": [
+            "Information will be displayed on the left side of the status bar.",
+            "Information will be displayed on the right side of the status bar."
+          ]
+        },
         "system-info.hideProcessorUsage": {
           "type": "boolean",
           "default": false,

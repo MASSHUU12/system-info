@@ -9,6 +9,15 @@ import { SystemInfo } from "./systemInfo/systemInfo";
  * @param {StatusCombined} status
  */
 export function displayData(status: StatusCombined): void {
+  // Check if location of the status bar items should change
+  if (status.cpu.getLocation() !== Settings.getLocation()) {
+    const location = Settings.getLocation();
+
+    status.cpu.setLocation(location);
+    status.ram.setLocation(location);
+    status.battery.setLocation(location);
+  }
+
   // Check if CPU usage should be hidden
   if (Settings.getHideProcessorUsage()) {
     // Hide item

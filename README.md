@@ -2,6 +2,9 @@
 
 Get up-to-date information about your computer resource usage on status bar.
 
+![Extension video (may not work in the IDE or marketplace, but it works on GitHub)](https://user-images.githubusercontent.com/61974579/220412247-f511aa3b-e6b3-4711-bdf6-e3115444431d.mp4
+)
+
 ## Features
 
 * CPU utilization
@@ -19,6 +22,7 @@ Please report any bugs or advice on the [repository](https://github.com/MASSHUU1
 ## Extension Settings
 
 * `system-info.refreshRate`: Controls the refresh rate of information
+* `system-info.location`: Select where the information will be displayed on the status bar
 * `system-info.hideProcessorUsage`: Hide CPU utilization
 * `system-info.hideMemoryUsage`: Hide RAM usage
 

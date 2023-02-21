@@ -3,8 +3,10 @@ import { StatusColors } from "../constants/enums";
 
 export class StatusItem {
   private item;
+  private priority;
 
   constructor(text = "", alignment = StatusBarAlignment.Left, priority = 0) {
+    this.priority = priority;
     this.item = window.createStatusBarItem(alignment, priority);
     this.item.text = text;
     this.item.show();
@@ -62,5 +64,32 @@ export class StatusItem {
    */
   public show(): void {
     this.item.show();
+  }
+
+  /**
+   * Change location of the status bar item
+   *
+   * @param {StatusBarAlignment} location
+   * @memberof StatusItem
+   */
+  public setLocation(location: StatusBarAlignment) {
+    const text = this.item.text;
+
+    // Remove old item
+    this.item.dispose();
+    // Create the same item, but with new alignment
+    this.item = window.createStatusBarItem(location, this.priority);
+    this.item.text = text;
+    this.item.show();
+  }
+
+  /**
+   * Get alignment of the status bar item
+   *
+   * @return {*}  {StatusBarAlignment}
+   * @memberof StatusItem
+   */
+  public getLocation(): StatusBarAlignment {
+    return this.item.alignment;
   }
 }

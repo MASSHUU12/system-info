@@ -1,4 +1,4 @@
-import { workspace } from "vscode";
+import { StatusBarAlignment, workspace } from "vscode";
 
 export class Settings {
   /**
@@ -16,6 +16,23 @@ export class Settings {
 
     // Check if parsed number is in acceptable range and return it
     return rate < 500 ? 1000 : rate;
+  }
+
+  /**
+   * Get location where the information will be displayed
+   *
+   * @static
+   * @return {*}  {StatusLocation}
+   * @memberof Settings
+   */
+  static getLocation(): StatusBarAlignment {
+    // Download the current configuration
+    const configuration = workspace.getConfiguration("system-info");
+    const location = configuration.get("location");
+
+    return location === "left"
+      ? StatusBarAlignment.Left
+      : StatusBarAlignment.Right;
   }
 
   /**

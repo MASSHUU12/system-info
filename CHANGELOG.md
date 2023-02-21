@@ -2,6 +2,16 @@
 
 All notable changes to this extension will be documented in this file.
 
+## [0.3.0 - 2023-02-21]
+
+### Added
+
+* Option to change alignment of the information on the status bar
+
+### Changed
+
+* Updated README to reflect new changes in the extension (also has a video showing how the extension works)
+
 ## [0.2.0 - 2023-02-21]
 
 ### Added
