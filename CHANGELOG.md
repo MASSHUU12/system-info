@@ -6,4 +6,6 @@ All notable changes to this extension will be documented in this file.
 
 ### Added
 
-- CPU current load monitor
+* CPU utilization
+* RAM usage
+* Setting to control the refresh rate of information
