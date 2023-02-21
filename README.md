@@ -19,7 +19,8 @@ Please report any bugs or advice on the [repository](https://github.com/MASSHUU1
 ## Extension Settings
 
 * `system-info.refreshRate`: Controls the refresh rate of information
-
+* `system-info.hideProcessorUsage`: Hide CPU utilization
+* `system-info.hideMemoryUsage`: Hide RAM usage
 
 ## Release Notes
 

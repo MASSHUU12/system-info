@@ -45,4 +45,22 @@ export class StatusItem {
         break;
     }
   }
+
+  /**
+   * Hide status bar item
+   *
+   * @memberof StatusItem
+   */
+  public hide(): void {
+    this.item.hide();
+  }
+
+  /**
+   * Show status bar item
+   *
+   * @memberof StatusItem
+   */
+  public show(): void {
+    this.item.show();
+  }
 }
