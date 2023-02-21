@@ -1,8 +1,12 @@
 import { Converter } from "../helpers/unitConverter";
 import { currentLoad, battery, mem } from "systeminformation";
 import * as os from "os";
+import { exec } from "child_process";
+import { cpuLoadMac, cpuLoadPS1, cpuLoadSH } from "../scripts/scripts";
 
 export class SystemInfo {
+  static cpuLoad = "";
+
   /**
    * Get the current CPU load of this process in percent
    *
@@ -20,50 +24,67 @@ export class SystemInfo {
    * Get the current CPU usage
    *
    * @static
-   * @param {(percentage: string) => any} callback
    * @memberof SystemInfo
    */
-  static cpuUsage(callback: (percentage: string) => any): void {
-    let stats1 = SystemInfo.cpuInfo();
-    let startIdle = stats1.idle;
-    let startTotal = stats1.total;
+  static cpuSystemLoad() {
+    switch (this.os()) {
+      case "win32":
+        this.cpuSpecificOS(cpuLoadPS1, "powershell.exe");
+        break;
 
-    setTimeout(function () {
-      let stats2 = SystemInfo.cpuInfo();
-      let endIdle = stats2.idle;
-      let endTotal = stats2.total;
+      case "linux":
+        this.cpuSpecificOS(cpuLoadSH);
+        break;
 
-      let idle = endIdle - startIdle;
-      let total = endTotal - startTotal;
-      let percentage = ((1 - idle / total) * 100).toFixed(2);
+      case "darwin":
+        this.cpuSpecificOS(cpuLoadMac);
+        break;
 
-      callback(percentage);
-    }, 1000);
+      default:
+        break;
+    }
+    return this.cpuLoad;
   }
 
-  static cpuInfo() {
-    const cpus = os.cpus();
+  /**
+   * Get CPU load on specific OS
+   *
+   * @static
+   * @return {*}  {void}
+   * @memberof SystemInfo
+   */
+  static cpuSpecificOS(script: string, shell = ""): void {
+    // Run script, and get Readable
+    // If system is Windows run the script in Powershell instead of the default shell
+    const { stdout } = exec(script, {
+      shell: shell !== "" ? shell : undefined,
+    });
 
-    let user = 0;
-    let nice = 0;
-    let sys = 0;
-    let idle = 0;
-    let irq = 0;
-    let total = 0;
-
-    for (let cpu in cpus) {
-      user += cpus[cpu].times.user;
-      nice += cpus[cpu].times.nice;
-      sys += cpus[cpu].times.sys;
-      irq += cpus[cpu].times.irq;
-      idle += cpus[cpu].times.idle;
+    if (stdout === null) {
+      return;
     }
-    total = user + nice + sys + idle + irq;
 
-    return {
-      idle: idle,
-      total: total,
-    };
+    // Add listener to variable, which will run on every data passed to Readable
+    stdout.on("data", (stream: string) => {
+      // Remove all unnecessary characters, leave only numbers
+      let formatted = stream.replace(/[^0-9]+/g, "");
+
+      // Assign the result to a variable, only if it is not empty
+      if (formatted !== "") {
+        this.cpuLoad = formatted;
+      }
+    });
+  }
+
+  /**
+   * Get operating system name
+   *
+   * @static
+   * @return {*}  {string}
+   * @memberof SystemInfo
+   */
+  static os(): string {
+    return os.platform().toString();
   }
 
   /**
