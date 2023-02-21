@@ -1,6 +1,7 @@
 import { Converter } from "../../helpers/unitConverter";
-import { battery, mem } from "systeminformation";
+import { battery } from "systeminformation";
 import { CPU } from "./cpu";
+import * as os from "os";
 
 export class SystemInfo extends CPU {
   /**
@@ -26,6 +27,6 @@ export class SystemInfo extends CPU {
    * @memberof SystemInfo
    */
   static async memoryActive(): Promise<string> {
-    return Converter.auto((await mem()).active);
+    return Converter.auto(os.totalmem() - os.freemem());
   }
 }
