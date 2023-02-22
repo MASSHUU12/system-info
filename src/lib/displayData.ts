@@ -1,6 +1,6 @@
 import { StatusCombined } from "../interfaces/statusCombined";
 import { Settings } from "./settings";
-import { SystemInfo } from "./systemInfo/systemInfo";
+import { systemInfo } from "./systemInfo/systemInfo";
 
 /**
  * Display data on StatusBar
@@ -23,11 +23,16 @@ export function displayData(status: StatusCombined): void {
     // Hide item
     status.cpu.hide();
   } else {
+    const load = parseInt(systemInfo.cpu.cpuSystemLoad());
+
     // Show item
     status.cpu.show();
 
     // CPU data
-    status.cpu.text(`CPU: ${SystemInfo.cpuSystemLoad()}%`);
+    status.cpu.text(`CPU: ${load}%`);
+
+    // Set status bar background color
+    status.cpu.autoChangeColor(load);
   }
 
   // Check if RAM usage should be hidden
@@ -39,8 +44,9 @@ export function displayData(status: StatusCombined): void {
     status.ram.show();
 
     // RAM data
-    SystemInfo.memoryActive().then((data) => {
-      status.ram.text(`RAM: ${data}`);
-    });
+    const memory = systemInfo.ram.memoryActive();
+
+    status.ram.text(`RAM: ${memory}`);
+    status.ram.autoChangeColor(systemInfo.ram.getRAMUsageAsPercent());
   }
 }

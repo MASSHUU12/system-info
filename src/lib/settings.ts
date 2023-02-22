@@ -45,9 +45,8 @@ export class Settings {
   static getHideProcessorUsage(): boolean {
     // Download the current configuration
     const configuration = workspace.getConfiguration("system-info");
-    const usage = configuration.get("hideProcessorUsage") as boolean;
 
-    return usage;
+    return configuration.get("hideProcessorUsage") as boolean;
   }
 
   /**
@@ -60,8 +59,55 @@ export class Settings {
   static getHideMemoryUsage(): boolean {
     // Download the current configuration
     const configuration = workspace.getConfiguration("system-info");
-    const usage = configuration.get("hideMemoryUsage") as boolean;
 
-    return usage;
+    return configuration.get("hideMemoryUsage") as boolean;
+  }
+
+  /**
+   * Get information about whether background should be colored
+   *
+   * @static
+   * @return {*}  {boolean}
+   * @memberof Settings
+   */
+  static getColoredBackground(): boolean {
+    // Download the current configuration
+    const configuration = workspace.getConfiguration("system-info");
+
+    return configuration.get("coloredBackground") as boolean;
+  }
+
+  /**
+   * Get information about when background should have warning color
+   *
+   * @static
+   * @return {*}  {number}
+   * @memberof Settings
+   */
+  static getWarningBGPercent(): number {
+    // Download the current configuration
+    const configuration = workspace.getConfiguration("system-info");
+    const percent = parseInt(
+      configuration.get("warningBackgroundPercent") as string
+    );
+
+    return Number.isNaN(percent) ? 75 : percent;
+  }
+
+  /**
+   * Get information about when background should have error color
+   *
+   * @static
+   * @return {*}  {number}
+   * @memberof Settings
+   */
+  static getErrorBGPercent(): number {
+    // Download the current configuration
+    const configuration = workspace.getConfiguration("system-info");
+    const percent = parseInt(
+      configuration.get("errorBackgroundPercent") as string
+    );
+
+    return Number.isNaN(percent) ? 90 : percent;
   }
 }

@@ -63,6 +63,25 @@
           "type": "boolean",
           "default": false,
           "markdownDescription": "Hide RAM usage.\n\n*Note: The time it will take before an item disappears/appears depends on `#system-info.refreshRate#`.*\n\n*Will be improved in the future.*"
+        },
+        "system-info.coloredBackground": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Determines whether the background of items should be colored according to the utilization of the hardware."
+        },
+        "system-info.warningBackgroundPercent": {
+          "type": "number",
+          "default": 75,
+          "minimum": 0,
+          "maximum": 100,
+          "markdownDescription": "Changes the color of the item to a warning color if the specified percentage is exceeded."
+        },
+        "system-info.errorBackgroundPercent": {
+          "type": "number",
+          "default": 90,
+          "minimum": 0,
+          "maximum": 100,
+          "markdownDescription": "Changes the color of the item to a error color if the specified percentage is exceeded."
         }
       }
     }

@@ -2,6 +2,12 @@
 
 All notable changes to this extension will be documented in this file.
 
+## [0.4.0 - 2023-02-22]
+
+### Added
+
+* An option to specify whether the background of items should be colored according to the utilization of hardware, and when it should happen
+
 ## [0.3.0 - 2023-02-21]
 
 ### Added

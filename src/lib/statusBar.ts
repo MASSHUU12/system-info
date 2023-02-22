@@ -1,5 +1,6 @@
 import { window, StatusBarAlignment, ThemeColor } from "vscode";
 import { StatusColors } from "../constants/enums";
+import { Settings } from "./settings";
 
 export class StatusItem {
   private item;
@@ -45,6 +46,27 @@ export class StatusItem {
       default:
         this.item.backgroundColor = new ThemeColor("statusBar.background");
         break;
+    }
+  }
+
+  /**
+   * Automatically change background color based on usage
+   *
+   * @param {number} percentage
+   * @memberof StatusItem
+   */
+  public autoChangeColor(percentage: number): void {
+    if (!Settings.getColoredBackground()) {
+      this.bgColor(StatusColors.default);
+      return;
+    }
+
+    if (percentage >= Settings.getErrorBGPercent()) {
+      this.bgColor(StatusColors.error);
+    } else if (percentage >= Settings.getWarningBGPercent()) {
+      this.bgColor(StatusColors.warning);
+    } else {
+      this.bgColor(StatusColors.default);
     }
   }
 

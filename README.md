@@ -25,6 +25,11 @@ Please report any bugs or advice on the [repository](https://github.com/MASSHUU1
 * `system-info.location`: Select where the information will be displayed on the status bar
 * `system-info.hideProcessorUsage`: Hide CPU utilization
 * `system-info.hideMemoryUsage`: Hide RAM usage
+* `system-info.coloredBackground`: Determines whether the background of items should be colored according to the utilization of the hardware
+* `system-info.warningBackgroundPercent`: Changes the color of the item to a warning color if the specified percentage is exceeded.
+* `system-info.errorBackgroundPercent`: Changes the color of the item to a error color if the specified percentage is exceeded.
+
+> Note: The colors depend on the theme.
 
 ## Release Notes
 

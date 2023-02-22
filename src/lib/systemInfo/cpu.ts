@@ -4,7 +4,7 @@ import { cpuLoadMac, cpuLoadPS1, cpuLoadSH } from "../../scripts/scripts";
 import { OS } from "./os";
 
 export class CPU {
-  static cpuLoad = "";
+  static cpuLoad = "0";
 
   /**
    * Get the current CPU load of this process in percent
