@@ -2,7 +2,7 @@
   "name": "system-info",
   "displayName": "System Info",
   "description": "Get up-to-date information about your computer resource usage.",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "preview": true,
   "publisher": "MASSHUU12",
   "repository": {
