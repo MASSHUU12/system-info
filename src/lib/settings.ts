@@ -1,6 +1,18 @@
-import { StatusBarAlignment, workspace } from "vscode";
+import { StatusBarAlignment, workspace, WorkspaceConfiguration } from "vscode";
 
 export class Settings {
+  /**
+   * Get user extension configuration
+   *
+   * @private
+   * @static
+   * @return {*}  {WorkspaceConfiguration}
+   * @memberof Settings
+   */
+  private static getConfiguration(): WorkspaceConfiguration {
+    return workspace.getConfiguration("system-info");
+  }
+
   /**
    * Get extension refresh rate
    *
@@ -9,10 +21,9 @@ export class Settings {
    * @memberof Settings
    */
   static getRefreshRate(): number {
-    // Download the current configuration
-    // ? This line must repeat in each method so that the current settings are always retrieved.
-    const configuration = workspace.getConfiguration("system-info");
-    const rate = parseFloat(configuration.get("refreshRate") as string);
+    const rate = parseFloat(
+      Settings.getConfiguration().get("refreshRate") as string
+    );
 
     // Check if parsed number is in acceptable range and return it
     return rate < 500 ? 1000 : rate;
@@ -26,9 +37,7 @@ export class Settings {
    * @memberof Settings
    */
   static getLocation(): StatusBarAlignment {
-    // Download the current configuration
-    const configuration = workspace.getConfiguration("system-info");
-    const location = configuration.get("location");
+    const location = Settings.getConfiguration().get("location");
 
     return location === "left"
       ? StatusBarAlignment.Left
@@ -43,10 +52,7 @@ export class Settings {
    * @memberof Settings
    */
   static getHideProcessorUsage(): boolean {
-    // Download the current configuration
-    const configuration = workspace.getConfiguration("system-info");
-
-    return configuration.get("hideProcessorUsage") as boolean;
+    return Settings.getConfiguration().get("hideProcessorUsage") as boolean;
   }
 
   /**
@@ -57,10 +63,7 @@ export class Settings {
    * @memberof Settings
    */
   static getHideMemoryUsage(): boolean {
-    // Download the current configuration
-    const configuration = workspace.getConfiguration("system-info");
-
-    return configuration.get("hideMemoryUsage") as boolean;
+    return Settings.getConfiguration().get("hideMemoryUsage") as boolean;
   }
 
   /**
@@ -71,10 +74,7 @@ export class Settings {
    * @memberof Settings
    */
   static getColoredBackground(): boolean {
-    // Download the current configuration
-    const configuration = workspace.getConfiguration("system-info");
-
-    return configuration.get("coloredBackground") as boolean;
+    return Settings.getConfiguration().get("coloredBackground") as boolean;
   }
 
   /**
@@ -85,10 +85,8 @@ export class Settings {
    * @memberof Settings
    */
   static getWarningBGPercent(): number {
-    // Download the current configuration
-    const configuration = workspace.getConfiguration("system-info");
     const percent = parseInt(
-      configuration.get("warningBackgroundPercent") as string
+      Settings.getConfiguration().get("warningBackgroundPercent") as string
     );
 
     return Number.isNaN(percent) ? 75 : percent;
@@ -102,10 +100,8 @@ export class Settings {
    * @memberof Settings
    */
   static getErrorBGPercent(): number {
-    // Download the current configuration
-    const configuration = workspace.getConfiguration("system-info");
     const percent = parseInt(
-      configuration.get("errorBackgroundPercent") as string
+      Settings.getConfiguration().get("errorBackgroundPercent") as string
     );
 
     return Number.isNaN(percent) ? 90 : percent;
