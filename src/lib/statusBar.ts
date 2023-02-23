@@ -99,6 +99,7 @@ export class StatusItem {
 
     // Remove old item
     this.item.dispose();
+
     // Create the same item, but with new alignment
     this.item = window.createStatusBarItem(location, this.priority);
     this.item.text = text;

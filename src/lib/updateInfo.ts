@@ -1,10 +1,16 @@
 import { StatusCombined } from "../interfaces/statusCombined";
-import { displayData } from "./displayData";
+import { ManageItems } from "./manageItems";
 import { Settings } from "./settings";
 
+/**
+ * Main loop of the extension
+ *
+ * @export
+ * @param {StatusCombined} status
+ */
 export function updateInfo(status: StatusCombined): void {
   setTimeout(() => {
-    displayData(status);
+    ManageItems.run(status);
     updateInfo(status);
   }, Settings.getRefreshRate());
 }
