@@ -1,4 +1,4 @@
-import { StatusCombined } from "../interfaces/statusCombined";
+import { StatusCombined } from "../interfaces/interfaces";
 import { ManageItems } from "./manageItems";
 import { Settings } from "./settings";
 

@@ -1,15 +1,25 @@
-import { window, StatusBarAlignment, ThemeColor } from "vscode";
+import { window, StatusBarAlignment, ThemeColor, commands } from "vscode";
 import { StatusColors } from "../constants/enums";
+import { StatusItemOptions } from "../interfaces/interfaces";
 import { Settings } from "./settings";
 
 export class StatusItem {
   private item;
   private priority;
 
-  constructor(text = "", alignment = StatusBarAlignment.Left, priority = 0) {
-    this.priority = priority;
-    this.item = window.createStatusBarItem(alignment, priority);
-    this.item.text = text;
+  constructor(
+    options: StatusItemOptions = {
+      alignment: StatusBarAlignment.Left,
+      priority: 0,
+      tooltip: undefined,
+      command: undefined,
+    }
+  ) {
+    this.priority = options.priority;
+    this.item = window.createStatusBarItem(options.alignment, options.priority);
+    this.item.text = "";
+    this.item.tooltip = options.tooltip;
+    this.item.command = options.command;
     this.item.show();
   }
 
@@ -94,7 +104,7 @@ export class StatusItem {
    * @param {StatusBarAlignment} location
    * @memberof StatusItem
    */
-  public setLocation(location: StatusBarAlignment) {
+  public setLocation(location: StatusBarAlignment): void {
     const text = this.item.text;
 
     // Remove old item

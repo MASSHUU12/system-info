@@ -106,4 +106,32 @@ export class Settings {
 
     return Number.isNaN(percent) ? 90 : percent;
   }
+
+  /**
+   * Display memory usage as a percentage
+   *
+   * @static
+   * @return {*}  {boolean}
+   * @memberof Settings
+   */
+  static getMemoryUsageAsPercentage(): boolean {
+    return Settings.getConfiguration().get(
+      "memoryUsageAsPercentage"
+    ) as boolean;
+  }
+
+  /**
+   *
+   *
+   * @static
+   * @param {boolean} newSetting
+   * @memberof Settings
+   */
+  static setMemoryUsageAsPercentage(newSetting: boolean): void {
+    Settings.getConfiguration().update(
+      "memoryUsageAsPercentage",
+      newSetting,
+      true
+    );
+  }
 }

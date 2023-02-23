@@ -1,4 +1,4 @@
-import { StatusCombined } from "../interfaces/statusCombined";
+import { StatusCombined } from "../interfaces/interfaces";
 import { Settings } from "./settings";
 import { StatusItem } from "./statusBar";
 import { systemInfo } from "./systemInfo/systemInfo";
@@ -52,13 +52,8 @@ export class ManageItems {
     } else {
       const load = parseInt(systemInfo.cpu.cpuSystemLoad());
 
-      // Show item
       cpu.show();
-
-      // CPU data
       cpu.text(`CPU: ${load}%`);
-
-      // Set status bar background color
       cpu.autoChangeColor(load);
     }
   }
@@ -77,12 +72,15 @@ export class ManageItems {
       // Hide item
       ram.hide();
     } else {
-      // Show item
+      let memory: string;
+
+      if (Settings.getMemoryUsageAsPercentage()) {
+        memory = `${systemInfo.ram.getRAMUsageAsPercent().toFixed(2)}%`;
+      } else {
+        memory = systemInfo.ram.memoryActive();
+      }
+
       ram.show();
-
-      // RAM data
-      const memory = systemInfo.ram.memoryActive();
-
       ram.text(`RAM: ${memory}`);
       ram.autoChangeColor(systemInfo.ram.getRAMUsageAsPercent());
     }

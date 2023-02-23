@@ -2,12 +2,18 @@
 
 All notable changes to this extension will be documented in this file.
 
-## [Unreleased]
+## [0.5.0 - 2023-02-23]
+
+### Added
+
+* New command to toggle how RAM usage is displayed
+* New option in settings to determine how RAM usage is to be displayed
 
 ### Changed
 
 * Refactoring multiple files to improve extension performance and prepare them for the introduction of new functionality
 * A blocking mechanism has been used when fetching processor information to reduce the impact on computer performance
+* RAM usage on the taskbar is now clickable, allowing you to toggle how it is displayed
 * README has been refreshed to present new changes and include more information
 
 ## [0.4.0 - 2023-02-22]
