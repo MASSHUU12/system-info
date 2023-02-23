@@ -39,6 +39,7 @@ The information refresh rate may be different from that specified in the setting
 * `system-info.coloredBackground`: Determines whether the background of items should be colored according to the utilization of the hardware
 * `system-info.warningBackgroundPercent`: Changes the color of the item to a warning color if the specified percentage is exceeded.
 * `system-info.errorBackgroundPercent`: Changes the color of the item to a error color if the specified percentage is exceeded.
+* `system-info.memoryUsageAsPercentage`: Display memory usage as a percentage.
 
 > Note: The colors depend on the theme.
 
