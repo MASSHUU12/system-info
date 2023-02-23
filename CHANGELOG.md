@@ -2,6 +2,14 @@
 
 All notable changes to this extension will be documented in this file.
 
+## [Unreleased]
+
+### Changed
+
+* Refactoring multiple files to improve extension performance and prepare them for the introduction of new functionality
+* A blocking mechanism has been used when fetching processor information to reduce the impact on computer performance
+* README has been refreshed to present new changes and include more information
+
 ## [0.4.0 - 2023-02-22]
 
 ### Added
