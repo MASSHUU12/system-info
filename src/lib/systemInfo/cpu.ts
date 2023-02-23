@@ -1,4 +1,4 @@
-import { exec } from "child_process";
+import { exec, execSync } from "child_process";
 import { currentLoad } from "systeminformation";
 import { cpuLoadMac, cpuLoadPS1, cpuLoadSH } from "../../scripts/scripts";
 import { OS } from "./os";
@@ -55,23 +55,17 @@ export class CPU {
   static cpuSpecificOS(script: string, shell = ""): void {
     // Run script, and get Readable
     // If system is Windows run the script in Powershell instead of the default shell
-    const { stdout } = exec(script, {
+    const output = execSync(script, {
       shell: shell !== "" ? shell : undefined,
+      // Terminate the program when it blocks for too long
+      timeout: 20000,
+      encoding: "utf8",
     });
 
-    if (stdout === null) {
-      return;
+    let formatted = output.replace(/[^0-9]+/g, "");
+
+    if (formatted !== "") {
+      this.cpuLoad = formatted;
     }
-
-    // Add listener to variable, which will run on every data passed to Readable
-    stdout.on("data", (stream: string) => {
-      // Remove all unnecessary characters, leave only numbers
-      let formatted = stream.replace(/[^0-9]+/g, "");
-
-      // Assign the result to a variable, only if it is not empty
-      if (formatted !== "") {
-        this.cpuLoad = formatted;
-      }
-    });
   }
 }
