@@ -39,7 +39,7 @@
           "minimum": 500,
           "maximum": 60000,
           "default": 1000,
-          "markdownDescription": "Data refresh rate (in ms).\n\n*Note: The more frequent the refresh, the more performance will be affected by the extension.*"
+          "markdownDescription": "Data refresh rate (in ms).\n\n*Note: The more frequent the refresh, the more performance will be affected by the extension.*\n\n*The refresh rate may vary due to the use of a blocking mechanism to retrieve processor information, so the impact on computer performance is significantly reduced.*"
         },
         "system-info.location": {
           "type": "string",
