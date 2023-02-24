@@ -6,8 +6,6 @@ export class Battery {
    *
    * Returns `undefined` when there is no battery
    *
-   * **Huge usage of CPU**
-   *
    * @static
    * @return {*}  {(Promise<number | undefined>)}
    * @memberof Battery

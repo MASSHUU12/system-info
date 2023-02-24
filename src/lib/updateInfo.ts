@@ -9,8 +9,8 @@ import { Settings } from "./settings";
  * @param {StatusCombined} status
  */
 export function updateInfo(status: StatusCombined): void {
-  setTimeout(() => {
-    ManageItems.run(status);
+  setTimeout(async () => {
+    await ManageItems.run(status);
     updateInfo(status);
   }, Settings.getRefreshRate());
 }

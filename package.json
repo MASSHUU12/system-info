@@ -94,6 +94,11 @@
           "type": "boolean",
           "default": false,
           "markdownDescription": "Display memory usage as a percentage."
+        },
+        "system-info.hideBatteryStatus": {
+          "type": "boolean",
+          "default": false,
+          "markdownDescription": "Hide battery status."
         }
       }
     }

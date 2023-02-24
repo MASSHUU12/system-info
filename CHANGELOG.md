@@ -2,6 +2,13 @@
 
 All notable changes to this extension will be documented in this file.
 
+## [Unreleased]
+
+### Added
+
+* Battery status
+* Setting to show/hide battery status
+
 ## [0.5.0 - 2023-02-23]
 
 ### Added

@@ -134,4 +134,26 @@ export class Settings {
       true
     );
   }
+
+  /**
+   * Get information about whether battery status should be hidden
+   *
+   * @static
+   * @return {*}  {boolean}
+   * @memberof Settings
+   */
+  static getHideBatteryStatus(): boolean {
+    return Settings.getConfiguration().get("hideBatteryStatus") as boolean;
+  }
+
+  /**
+   *
+   *
+   * @static
+   * @param {boolean} newSetting
+   * @memberof Settings
+   */
+  static setHideBatteryStatus(newSetting: boolean): void {
+    Settings.getConfiguration().update("hideBatteryStatus", newSetting, true);
+  }
 }

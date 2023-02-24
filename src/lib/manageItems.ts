@@ -11,10 +11,11 @@ export class ManageItems {
    * @param {StatusCombined} status
    * @memberof name
    */
-  static run(status: StatusCombined): void {
+  static async run(status: StatusCombined): Promise<void> {
     ManageItems.manageAlignment(status);
     ManageItems.manageCPU(status.cpu);
     ManageItems.manageRAM(status.ram);
+    await ManageItems.manageBattery(status.battery);
   }
 
   /**
@@ -45,17 +46,15 @@ export class ManageItems {
    * @memberof ManageItems
    */
   private static manageCPU(cpu: StatusItem): void {
-    // Check if CPU usage should be hidden
     if (Settings.getHideProcessorUsage()) {
-      // Hide item
       cpu.hide();
-    } else {
-      const load = parseInt(systemInfo.cpu.cpuSystemLoad());
-
-      cpu.show();
-      cpu.text(`CPU: ${load}%`);
-      cpu.autoChangeColor(load);
+      return;
     }
+    const load = parseInt(systemInfo.cpu.cpuSystemLoad());
+
+    cpu.show();
+    cpu.text(`CPU: ${load}%`);
+    cpu.autoChangeColor(load);
   }
 
   /**
@@ -67,22 +66,47 @@ export class ManageItems {
    * @memberof ManageItems
    */
   private static manageRAM(ram: StatusItem): void {
-    // Check if RAM usage should be hidden
     if (Settings.getHideMemoryUsage()) {
-      // Hide item
       ram.hide();
-    } else {
-      let memory: string;
-
-      if (Settings.getMemoryUsageAsPercentage()) {
-        memory = `${systemInfo.ram.getRAMUsageAsPercent().toFixed(2)}%`;
-      } else {
-        memory = systemInfo.ram.memoryActive();
-      }
-
-      ram.show();
-      ram.text(`RAM: ${memory}`);
-      ram.autoChangeColor(systemInfo.ram.getRAMUsageAsPercent());
+      return;
     }
+    let memory: string;
+
+    if (Settings.getMemoryUsageAsPercentage()) {
+      memory = `${systemInfo.ram.getRAMUsageAsPercent().toFixed(2)}%`;
+    } else {
+      memory = systemInfo.ram.memoryActive();
+    }
+
+    ram.show();
+    ram.text(`RAM: ${memory}`);
+    ram.autoChangeColor(systemInfo.ram.getRAMUsageAsPercent());
+  }
+
+  /**
+   * Manage battery item
+   *
+   * @private
+   * @static
+   * @param {StatusItem} battery
+   * @return {*}  {Promise<void>}
+   * @memberof ManageItems
+   */
+  private static async manageBattery(battery: StatusItem): Promise<void> {
+    if (Settings.getHideBatteryStatus()) {
+      battery.hide();
+      return;
+    }
+    const batteryPercent = await systemInfo.battery.getPercent();
+
+    if (batteryPercent === undefined) {
+      battery.hide();
+      Settings.setHideBatteryStatus(true);
+      return;
+    }
+
+    battery.show();
+    battery.text(`Battery: ${batteryPercent}%`);
+    battery.autoChangeColor(100 - batteryPercent);
   }
 }
