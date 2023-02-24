@@ -1,4 +1,4 @@
-import { exec, execSync } from "child_process";
+import { execSync } from "child_process";
 import { currentLoad } from "systeminformation";
 import { cpuLoadMac, cpuLoadPS1, cpuLoadSH } from "../../scripts/scripts";
 import { OS } from "./os";
