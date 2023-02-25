@@ -36,6 +36,11 @@
         "command": "system-info.toggleMemoryUsageType",
         "title": "Toggle how memory usage is displayed",
         "category": "System Info"
+      },
+      {
+        "command": "system-info.toggleProcessorUsageType",
+        "title": "Switch between process/system CPU usage",
+        "category": "System Info"
       }
     ],
     "configuration": {
@@ -99,6 +104,19 @@
           "type": "boolean",
           "default": false,
           "markdownDescription": "Hide battery status."
+        },
+        "system-info.processorUsageType": {
+          "type": "string",
+          "default": "GLOBAL",
+          "enum": [
+            "GLOBAL",
+            "PROCESS"
+          ],
+          "description": "Determines whether CPU usage should be displayed for the entire system or for the current process.",
+          "enumDescriptions": [
+            "Display global CPU usage.",
+            "Display process CPU usage."
+          ]
         }
       }
     }

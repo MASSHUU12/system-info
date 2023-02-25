@@ -1,4 +1,5 @@
 import { StatusBarAlignment, workspace, WorkspaceConfiguration } from "vscode";
+import { CPUUsageType } from "../types/types";
 
 export class Settings {
   /**
@@ -155,5 +156,29 @@ export class Settings {
    */
   static setHideBatteryStatus(newSetting: boolean): void {
     Settings.getConfiguration().update("hideBatteryStatus", newSetting, true);
+  }
+
+  /**
+   * Determines whether CPU usage should be displayed for the entire system or for the current process
+   *
+   * @static
+   * @return {*}  {CPUUsageType}
+   * @memberof Settings
+   */
+  static getToggleProcessorUsageType(): CPUUsageType {
+    return Settings.getConfiguration().get(
+      "processorUsageType"
+    ) as CPUUsageType;
+  }
+
+  /**
+   *
+   *
+   * @static
+   * @param {CPUUsageType} newSetting
+   * @memberof Settings
+   */
+  static setToggleProcessorUsageType(newSetting: CPUUsageType): void {
+    Settings.getConfiguration().update("processorUsageType", newSetting, true);
   }
 }

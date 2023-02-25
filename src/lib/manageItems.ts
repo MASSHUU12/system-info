@@ -1,7 +1,7 @@
 import { StatusCombined } from "../interfaces/interfaces";
 import { Settings } from "./settings";
 import { StatusItem } from "./statusBar";
-import { system } from "./systemInfo/system";
+import { system } from "./system/system";
 
 export class ManageItems {
   /**
@@ -13,9 +13,9 @@ export class ManageItems {
    */
   static async run(status: StatusCombined): Promise<void> {
     ManageItems.manageAlignment(status);
-    ManageItems.manageCPU(status.cpu);
     ManageItems.manageRAM(status.ram);
     await ManageItems.manageBattery(status.battery);
+    await ManageItems.manageCPU(status.cpu);
   }
 
   /**
@@ -45,12 +45,19 @@ export class ManageItems {
    * @param {StatusItem} cpu
    * @memberof ManageItems
    */
-  private static manageCPU(cpu: StatusItem): void {
+  private static async manageCPU(cpu: StatusItem): Promise<void> {
+    let load: number;
+
     if (Settings.getHideProcessorUsage()) {
       cpu.hide();
       return;
     }
-    const load = parseInt(system.cpu.cpuSystemLoad());
+
+    if (Settings.getToggleProcessorUsageType() === "GLOBAL") {
+      load = parseInt(system.cpu.cpuSystemLoad());
+    } else {
+      load = parseInt(await system.cpu.cpuCurrentProcessLoad());
+    }
 
     cpu.show();
     cpu.text(`CPU: ${load}%`);
