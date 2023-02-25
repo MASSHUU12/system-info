@@ -1,7 +1,7 @@
 import { StatusCombined } from "../interfaces/interfaces";
 import { Settings } from "./settings";
 import { StatusItem } from "./statusBar";
-import { systemInfo } from "./systemInfo/systemInfo";
+import { system } from "./systemInfo/system";
 
 export class ManageItems {
   /**
@@ -50,7 +50,7 @@ export class ManageItems {
       cpu.hide();
       return;
     }
-    const load = parseInt(systemInfo.cpu.cpuSystemLoad());
+    const load = parseInt(system.cpu.cpuSystemLoad());
 
     cpu.show();
     cpu.text(`CPU: ${load}%`);
@@ -73,14 +73,14 @@ export class ManageItems {
     let memory: string;
 
     if (Settings.getMemoryUsageAsPercentage()) {
-      memory = `${systemInfo.ram.getRAMUsageAsPercent().toFixed(2)}%`;
+      memory = `${system.ram.getRAMUsageAsPercent().toFixed(2)}%`;
     } else {
-      memory = systemInfo.ram.memoryActive();
+      memory = system.ram.memoryActive();
     }
 
     ram.show();
     ram.text(`RAM: ${memory}`);
-    ram.autoChangeColor(systemInfo.ram.getRAMUsageAsPercent());
+    ram.autoChangeColor(system.ram.getRAMUsageAsPercent());
   }
 
   /**
@@ -97,7 +97,7 @@ export class ManageItems {
       battery.hide();
       return;
     }
-    const batteryPercent = await systemInfo.battery.getPercent();
+    const batteryPercent = await system.battery.getPercent();
 
     if (batteryPercent === undefined) {
       battery.hide();
