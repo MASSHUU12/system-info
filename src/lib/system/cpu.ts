@@ -15,7 +15,7 @@ export class CPU {
    */
   static async cpuCurrentProcessLoad(): Promise<string> {
     return currentLoad().then((data) => {
-      return `CPU: ${data.currentLoad.toFixed(2)}%`;
+      return data.currentLoad.toFixed(2);
     });
   }
 
