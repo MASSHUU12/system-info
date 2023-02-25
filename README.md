@@ -42,6 +42,7 @@ The information refresh rate may be different from that specified in the setting
 * `system-info.errorBackgroundPercent`: Changes the color of the item to a error color if the specified percentage is exceeded.
 * `system-info.memoryUsageAsPercentage`: Display memory usage as a percentage.
 * `system-info.hideBatteryStatus`: Hide battery status.
+* `system-info.processorUsageType`: Determines whether CPU usage should be displayed for the entire system or for the current process.
 
 > Note: The colors depend on the theme.
 

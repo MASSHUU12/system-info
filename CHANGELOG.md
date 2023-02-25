@@ -2,6 +2,18 @@
 
 All notable changes to this extension will be documented in this file.
 
+## [0.6.1 - 2023-02-25]
+
+### Added
+
+* Option to switch between process/system CPU usage
+
+### Changed
+
+* Updated dependencies
+* Some refactoring
+* Updated README
+
 ## [0.6.0 - 2023-02-24]
 
 ### Added
